@@ -1,0 +1,57 @@
+step1:npm init
+step2:Add file app.js
+step3:npm i express     //becoz joo api bannyengee express kee through banayengee
+step4:npm i mongoose
+step5:make one server 
+
+const express=require("express");
+const mongoose=require("mongoose");
+const app=express();
+
+app.listen(4500,()=>{
+    console.log("Server Is Working")
+})
+step6: node .\app.js     or use   nodemon .\app.js
+step7:firstly we will make one schema so that we can add delete update create 
+
+        const productSchema = new mongoose.Schema({
+            name:String,
+            description:String,
+            price:Number
+        })
+step8:Now we will make model which is also called as Collection
+
+        const Product = new mongoose.model("Product",productSchema)
+step9:Firstly we will create product koo banane kee api abb ess call back function kee andrr wahii render hoogaa joo humm likhengee eskee andrr Product koo create karnaa hee upar joo banyee hee 
+        app.post("/api/v1/product/new",(req,res)=>{
+            
+            Product.create(req.body);
+           const product= res.status(200).json({
+                success:true,
+                product
+
+            })
+
+        })
+step10 :for now you will get error because we use express  when ever we are  taking anything from req.body  things we need body parser 
+
+            npm i body-parser
+
+step11: firstly we will import the body parser
+            const bodyParser= require("body-parser")
+
+            app.use(bodyParser.urlencoded({ extended: false }))
+            app.use(express.json())   
+step12:For API TESTING we have post man
+->make post request ->go on raw -> go to dropdown and select JSON  
+
+step13:We make mistake that we have not connected with mongoDB 
+        hamnee import toh kiyaa thaa but connect nahii kiyaa thaa 
+        mongoose.connect("mongodb://localhost:27017/Sample" we can also use ""mongodb://127.0.0.1:27017/Sample",{ useNewUrlParser:true,useUnifiedTopology:true})
+
+        mongoose.connect("mongodb://127.0.0.1:27017/Sample", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+        console.log("Connected With MongoDB")
+        }).catch((err) => {
+        console.log(err)
+        })
+
