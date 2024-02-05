@@ -23,16 +23,17 @@ step8:Now we will make model which is also called as Collection
 
         const Product = new mongoose.model("Product",productSchema)
 step9:Firstly we will create product koo banane kee api abb ess call back function kee andrr wahii render hoogaa joo humm likhengee eskee andrr Product koo create karnaa hee upar joo banyee hee 
-        app.post("/api/v1/product/new",(req,res)=>{
+        
             
-            Product.create(req.body);
-           const product= res.status(200).json({
-                success:true,
-                product
+          app.post("/api/v1/product/new", async (req, res) => {
+            const product = await Product.create(req.body)
+            res.status(200).json({
+            success: true,
+            product
 
-            })
+    })
 
-        })
+       
 step10 :for now you will get error because we use express  when ever we are  taking anything from req.body  things we need body parser 
 
             npm i body-parser
@@ -54,4 +55,6 @@ step13:We make mistake that we have not connected with mongoDB
         }).catch((err) => {
         console.log(err)
         })
+
+step 14: Go to mongoDB Compass 
 
