@@ -1,0 +1,6 @@
+ //Arrays- Declaration
+ let arr=new Array();
+ let arr=[];
+ 
+
+
